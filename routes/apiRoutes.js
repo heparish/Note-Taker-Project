@@ -1,0 +1,1 @@
+// everysingle route has to read the file, alwasy hae to parse the data ocsn tin each route, alawsy have to parse the data before psoting or dealting
