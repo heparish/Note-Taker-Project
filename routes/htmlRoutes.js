@@ -1,15 +1,17 @@
-const express = require ("express"); 
-const router = express.Router();
-const path = require("path");
+const path = require('path');
 
+module.exports = (app) => {
+    // => HTML GET requests
+    app.get('/', (req, res) => {
+        res.sendFile(path.join(__dirname, '../public/index.html'));
+    });
 
-router.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/notes.html"))
-})
+    app.get('/notes', (req, res) => {
+        res.sendFile(path.join(__dirname, '../public/notes.html'));
+    });
 
-// always goes last
-router.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/index.html"))
-})
-
-module.exports = router
+    // if no matching code foute is found default to home
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../public/index.html'));
+    });
+}

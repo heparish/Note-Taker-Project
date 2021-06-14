@@ -4,10 +4,13 @@ const fs = require("fs");
 const path = require('path');
 const uniqid = require('uniqid');
 
+const dbPath = path.join(__dirname, '../db/db.json');
+
+
 module.exports = (app) => {
-    // API GET requests
+    // => API GET requests
     app.get('/api/notes', (req, res) => {
-        fs.readFile((path.join(__dirname, '../db/db.json')), "utf8", (err,data) => {
+        fs.readFile(dbPath, "utf8", (err,data) => {
             if (err) {
                 throw err;
             }
@@ -15,22 +18,24 @@ module.exports = (app) => {
         });
     });
 
+    //api POST requests
     app.post('/api/notes', (req, res) => {
         const note = req.body;
         note.id = uniqid();
-        const database = JSON.parse(fs.readFileSync("../db/db.json/"));
+        const database = JSON.parse(fs.readFileSync(dbPath));
         database.push(note);
-        fs.writeFileSync('../db/db.json', JSON.stringify(database));
+        fs.writeFileSync(dbPath, JSON.stringify(database));
         res.json ("your note has been saved")
     });
 
     app.delete('/api/notes/:id', (req, res) => {
         const deleId = req.params.id;
-        const dataToDele = JSON.parse(fs.readFileSync("../db/db.json/"));
+        const dataToDele = JSON.parse(fs.readFileSync(dbPath));
         let filtered = dataToDele.filter(function (el) {
             return el.id != deleId;
         });
-        fs.writeFileSync('../db/db.json', JSON.stringify(filtered));
+        fs.writeFileSync(dbPath, JSON.stringify(filtered));
         res.json ("your note has been deleted")
     })
-};
+
+}
