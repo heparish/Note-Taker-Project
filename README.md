@@ -36,7 +36,7 @@ Have a question? Contact me on github @heparish
 
 ## Grading Requirements
 
-This homework is graded based on the following criteria: 
+
 
 
 ### Technical Acceptance Criteria: 40%
