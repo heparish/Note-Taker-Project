@@ -12,8 +12,8 @@ app.use(express.json());
 app.use(express.static('public'));
 // app.use(htmlRoutes)
 
-require('./routes/apiroutes')(app);
-require('./routes/htmlroutes')(app);
+require('./routes/apiRoutes')(app);
+require('./routes/htmlRoutes')(app);
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!"+ " ...Click on the link: " +"http://localhost:3000/");
